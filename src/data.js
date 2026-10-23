@@ -34,6 +34,21 @@ function painIcon(place) {
 
 // ─── category tree ────────────────────────────────────────────────────────────
 export const tree = {
+  most_needed: {
+    title: "Most Needed",
+    icon: "⭐",
+    hint: "Quick communication options",
+    voicePreview: "Most needed. Choose from yes, no, please, thank you, I need help, or need something.",
+    children: [
+      leafMsg("Yes", "✅", "Yes."),
+      leafMsg("No", "❌", "No."),
+      leafMsg("Please", "🤲", "Please."),
+      leafMsg("Thank You", "🙏", "Thank you."),
+      leafMsg("I Need Help", "🆘", "I need help. Please come to me."),
+      leafMsg("Need Something", "❓", "I need something. Please check on me."),
+    ],
+  },
+
   water: {
     title: "Water",
     icon: "💧",
@@ -258,7 +273,7 @@ export const tree = {
 
 // Domain order for the home page grid
 export const domainOrder = [
-  "water", "food", "bathroom", "pain",
+  "most_needed", "water", "food", "bathroom", "pain",
   "unwell", "health", "comfort", "talk",
   "help", "other",
 ];

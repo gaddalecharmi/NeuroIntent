@@ -23,6 +23,14 @@ export function NeuroBrandEmblem({ className = "w-6 h-6", active = true }) {
 // ─── Cohesive, Colorful & High-Quality Category Illustrations ───────────────
 export function CategoryIllustration({ id, className = "w-16 h-16" }) {
   switch (id) {
+    case "most_needed":
+      return (
+        <svg viewBox="0 0 56 56" fill="none" className={className} strokeLinecap="round" strokeLinejoin="round">
+          <rect x="3" y="3" width="50" height="50" rx="16" fill="#FEF3C7" />
+          <path d="M28 13l4.5 9.2 10.1 1.5-7.3 7.1 1.7 10.1L28 36.2l-9 4.7 1.7-10.1-7.3-7.1 10.1-1.5L28 13z" fill="#F59E0B" stroke="#D97706" strokeWidth="2.5" />
+        </svg>
+      );
+
     case "water":
       return (
         <svg viewBox="0 0 56 56" fill="none" className={className} strokeLinecap="round" strokeLinejoin="round">
@@ -136,6 +144,16 @@ export function CategoryIllustration({ id, className = "w-16 h-16" }) {
 // ─── Human-Centered Vector Artwork for Subpage Option Cards ─────────────────
 export function OptionArt({ domainId, title, emoji, className = "w-12 h-12" }) {
   const t = title.toLowerCase();
+
+  // Most Needed quick communication options
+  if (domainId === "most_needed") {
+    if (t === "yes") return <QuickResponseGlyph id="yes" className={className} />;
+    if (t === "no") return <QuickResponseGlyph id="no" className={className} />;
+    if (t === "please") return <QuickResponseGlyph id="please" className={className} />;
+    if (t.includes("thank")) return <QuickResponseGlyph id="thankyou" className={className} />;
+    if (t.includes("help")) return <QuickResponseGlyph id="needhelp" className={className} />;
+    return <QuickResponseGlyph id="needsomething" className={className} />;
+  }
 
   // Water category options
   if (domainId === "water") {
@@ -354,6 +372,7 @@ export function OptionArt({ domainId, title, emoji, className = "w-12 h-12" }) {
 
   // Consistent colorful badge fallback
   const colorMap = {
+    most_needed: "bg-amber-100 text-amber-800 border-amber-200",
     water: "bg-sky-100 text-sky-800 border-sky-200",
     food: "bg-orange-100 text-orange-800 border-orange-200",
     bathroom: "bg-cyan-100 text-cyan-800 border-cyan-200",
