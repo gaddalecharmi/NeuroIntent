@@ -804,7 +804,7 @@ function PainDetailsScreen({ painNode, onConfirmSelection, onBack, onHome, gazeE
   ];
 
   return (
-    <div className="ni-screen-with-sidebar">
+    <div className="ni-screen-with-sidebar ni-pain-screen">
       <LeftNavRail
         onBack={onBack}
         onHome={onHome}
@@ -1431,6 +1431,21 @@ export default function App() {
     setScreen("confirmed");
   }, [speak, selection]);
 
+  const handlePainConfirm = useCallback((item) => {
+    if (messageSpeechRef.current.active) return;
+
+    const message = item.message;
+    messageSpeechRef.current = { text: message, active: true };
+    setSelection(item);
+    setMessageSpeaking(true);
+    setScreen("preview");
+    speak(message, () => {
+      if (messageSpeechRef.current.text !== message) return;
+      messageSpeechRef.current = { text: message, active: false };
+      setMessageSpeaking(false);
+    });
+  }, [speak]);
+
   const handleSOSUrgent = useCallback(() => {
     cancelSpeech();
     messageSpeechRef.current = { text: null, active: false };
@@ -1556,11 +1571,7 @@ export default function App() {
     screenContent = (
       <PainDetailsScreen
         painNode={activePainNode}
-        onConfirmSelection={item => {
-          setSelection(item);
-          setScreen("preview");
-          speak(item.message);
-        }}
+        onConfirmSelection={handlePainConfirm}
         onBack={navigateBack}
         onHome={navigateHome}
         {...gazeProps}
@@ -1620,6 +1631,7 @@ export default function App() {
       {gazeEnabled && (
         <video
           ref={videoRef}
+          className="ni-webcam-preview"
           autoPlay
           playsInline
           muted
