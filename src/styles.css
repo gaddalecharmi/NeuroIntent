@@ -792,6 +792,21 @@ button:focus-visible {
     grid-template-columns: 1fr;
     overflow-y: auto;
   }
+
+  .ni-pain-speak-card {
+    min-height: 190px;
+  }
+}
+
+@media (max-width: 520px) {
+  .ni-pain-speak-btn {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .ni-pain-speak-content {
+    align-items: center;
+  }
 }
 
 .ni-pain-col {
@@ -828,17 +843,21 @@ button:focus-visible {
 .ni-pain-sensation-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(200px, 1fr));
+  grid-auto-rows: 200px;
   gap: 10px;
   flex: 1;
-  min-height: 0;
-  height: 100%;
+  min-height: 420px;
+  height: auto;
+  overflow-y: auto;
 }
 
 @media (max-width: 768px) {
   .ni-pain-sensation-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto;
+    grid-template-rows: repeat(3, minmax(180px, 1fr));
+    grid-auto-rows: 180px;
+    min-height: 560px;
   }
 }
 
@@ -860,6 +879,13 @@ button:focus-visible {
   cursor: pointer;
   overflow: hidden;
   transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease, background-color 0.14s ease;
+}
+
+.ni-pain-card,
+.ni-pain-card:hover,
+.ni-pain-card.is-gazed,
+.ni-pain-card.is-selected {
+  min-height: 200px;
 }
 
 .ni-pain-card:hover,
@@ -926,8 +952,8 @@ button:focus-visible {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 10px;
-  flex: 1 1 auto;
-  min-height: clamp(220px, 32vh, 340px);
+  flex: 0 0 clamp(210px, 31vh, 300px);
+  min-height: 210px;
 }
 
 .ni-severity-card {
@@ -1034,10 +1060,11 @@ button:focus-visible {
 
 /* Large Speak Pain Card */
 .ni-pain-speak-card {
-  flex: 0 0 clamp(138px, 19vh, 190px);
-  min-height: 138px;
+  flex: 1 1 clamp(210px, 27vh, 260px);
+  min-height: 210px;
   display: flex;
   flex-direction: column;
+  min-width: 0;
 }
 
 .ni-pain-selection-hint {
@@ -1072,14 +1099,14 @@ button:focus-visible {
 .ni-pain-speak-btn {
   position: relative;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  gap: 10px;
+  text-align: left;
+  gap: clamp(14px, 2vw, 24px);
   width: 100%;
   height: 100%;
-  padding: 16px 20px;
+  padding: clamp(20px, 3vh, 34px) clamp(20px, 3vw, 42px);
   border-radius: 20px;
   border: 3px solid #CBD5E1;
   background: #FFFFFF;
@@ -1111,8 +1138,8 @@ button:focus-visible {
 }
 
 .ni-pain-speak-icon-box {
-  width: clamp(56px, 7.5vh, 76px);
-  height: clamp(56px, 7.5vh, 76px);
+  width: clamp(76px, 10vh, 112px);
+  height: clamp(76px, 10vh, 112px);
   border-radius: 20px;
   background: #E2E8F0;
   color: #64748B;
@@ -1131,13 +1158,14 @@ button:focus-visible {
 .ni-pain-speak-content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 4px;
-  max-width: 440px;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+  max-width: none;
 }
 
 .ni-pain-speak-heading {
-  font-size: clamp(1.2rem, 1.8vw, 1.55rem);
+  font-size: clamp(1.45rem, 2.2vw, 2rem);
   font-weight: 800;
   color: #0F172A;
   letter-spacing: -0.01em;
@@ -1148,15 +1176,21 @@ button:focus-visible {
 }
 
 .ni-pain-speak-preview {
-  font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+  font-size: clamp(1rem, 1.25vw, 1.2rem);
   font-weight: 600;
   color: #475569;
   line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .ni-pain-speak-card.is-ready .ni-pain-speak-preview {
   color: #047857;
   font-style: italic;
+}
+
+.ni-webcam-preview {
+  z-index: 9998;
+  pointer-events: none;
 }
 
 
@@ -2344,10 +2378,6 @@ button:focus-visible {
 .ni-grid-pager-arrow {
   font-size: clamp(1.8rem, 3vw, 2.6rem);
   line-height: 1;
-}
-
-.ni-pain-sensation-grid {
-  grid-template-rows: repeat(2, minmax(0, 1fr));
 }
 
 .ni-category-grid-paged,
